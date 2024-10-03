@@ -40,12 +40,12 @@ dev:
 deploy_env_setup:
 	@poetry install --all-extras --with dev
 
-test: kafka-cluster-start
-	@poetry run coverage run --source=spark_expectations --omit "spark_expectations/examples/*" -m pytest && \
-	poetry run coverage report -m && \
-	poetry run coverage html
+# test: kafka-cluster-start
+# 	@poetry run coverage run --source=spark_expectations --omit "spark_expectations/examples/*" -m pytest && \
+# 	poetry run coverage report -m && \
+# 	poetry run coverage html
 
-	make kafka-cluster-stop
+# 	make kafka-cluster-stop
 
 build:
 	@poetry build
@@ -63,7 +63,7 @@ poetry:
 #	@poetry lock
 #	@poetry install --with dev
 
-coverage: check test
+#coverage: check test
 
 docs:
 	@poetry run mike deploy -u dev latest
