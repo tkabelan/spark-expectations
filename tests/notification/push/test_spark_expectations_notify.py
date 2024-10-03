@@ -441,7 +441,7 @@ def test_notify_rules_exceeds_threshold(
             {
                 "rule": "rule1",
                 "enable_error_drop_alert": enable_error_drop_alert,
-                "action_if_failed": "skip",
+                "action_if_failed": "drop",
                 "error_drop_threshold": set_error_drop_threshold,
             }
         ]
@@ -454,6 +454,11 @@ def test_notify_rules_exceeds_threshold(
     notify_handler.notify_rules_exceeds_threshold(rules)
 
     # Assertions
+    action_if_failed = rules["row_dq_rules"][0]["action_if_failed"]
+    assert action_if_failed in ["ignore", "drop"], (
+        f"Test failed: 'action_if_failed' must be either 'ignore' or 'drop', but got '{action_if_failed}'"
+    )   
+
     if expected_notification_called:
         _mock_notification_hook.assert_called_once()
     else:
