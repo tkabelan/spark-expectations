@@ -63,7 +63,7 @@ poetry:
 #	@poetry lock
 #	@poetry install --with dev
 
-#coverage: check test
+coverage: check test
 
 docs:
 	@poetry run mike deploy -u dev latest
