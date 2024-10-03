@@ -252,6 +252,10 @@ class SparkExpectationsNotify:
 
                 rule_name = rule["rule"]
                 rule_action = rule["action_if_failed"]
+                if rule_action not in ["ignore", "drop"]:
+                    raise ValueError(
+                        f"Invalid action_if_failed value: {rule_action}. Must be 'ignore' or 'drop'."
+                    )
                 failed_row_count = int(
                     rules_failed_row_count[rule_name]
                     if rule_name in rules_failed_row_count
